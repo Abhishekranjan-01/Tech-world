@@ -1,4 +1,6 @@
 import { Navbar, Button } from "flowbite-react";
+import { NavLink } from "react-router-dom";
+import SignupFormDialog from "../components/modal/signup.modal";
 
 export function NavbarMenu() {
   return (
@@ -14,19 +16,38 @@ export function NavbarMenu() {
         </span>
       </Navbar.Brand>
       <div className="flex md:order-2">
-        <Button className=" max-sm:p-0 max-sm:mx-4 text-sm sm:text-base sm:w-fit">
+        {/* <Button className=" max-sm:p-0 max-sm:mx-4 text-sm sm:text-base sm:w-fit">
           Add Blog
-        </Button>
+        </Button> */}
+        <SignupFormDialog />
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
-        <Navbar.Link href="#" active>
+        <NavLink
+          to="/"
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "text-[#00838F]"
+              : "text-gray-600"
+          }
+        >
           Home
-        </Navbar.Link>
-        <Navbar.Link href="#">About</Navbar.Link>
-        <Navbar.Link href="#">Services</Navbar.Link>
-        <Navbar.Link href="#">Pricing</Navbar.Link>
-        <Navbar.Link href="#">Contact</Navbar.Link>
+        </NavLink>
+
+        <NavLink
+          to="/blogs"
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "text-[#00838F]"
+              : "text-gray-600"
+          }
+        >
+          Blogs
+        </NavLink>
       </Navbar.Collapse>
     </Navbar>
   );

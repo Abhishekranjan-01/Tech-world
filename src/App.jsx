@@ -6,6 +6,7 @@ import "./App.css";
 
 import { NavbarMenu } from "./components";
 import { Blogs, Home } from "./pages";
+import SignupForm from "./components/form/Signup.form";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <NavbarMenu />
       <Routes>
         <Route path="/" element={<Home />} />
+        {/* <Route path="/" element={<SignupForm />} /> */}
         <Route path="/blogs" element={<Blogs />} />
       </Routes>
     </BrowserRouter>
