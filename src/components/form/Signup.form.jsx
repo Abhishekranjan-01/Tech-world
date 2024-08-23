@@ -2,6 +2,7 @@ import { Formik, ErrorMessage } from "formik";
 import { userSchema } from "../../schema/user/user.schema";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useUser from "../../hooks/user.hook";
 
 export default function SignupForm({
   open,
@@ -9,25 +10,34 @@ export default function SignupForm({
   handleClickOpen,
   handleClose,
 }) {
-  const notify = ({ ...props }) => toast("Signup successfull", { ...props });
+  const { data, isLoading, isPending, error, setUserCredentials } = useUser();
+
+  const notify = ({ label, ...props }) => toast(label, { ...props });
+  if (!isLoading && !isPending && !error && data) {
+    notify({ label: `Successfully created new account!!`, type: "success" });
+  }
+  console.log("Checking ERror:\t", Boolean(error));
+
+  if (!isLoading && !isPending && Boolean(error)) {
+    console.log("Error On Signup Form");
+
+    notify({ label: `${error.message}`, type: "error" });
+  }
   return (
     <Formik
       initialValues={{ firstName: "", lastName: "", email: "", password: "" }}
       validationSchema={userSchema}
       onSubmit={(e) => {
         console.log(e);
-        notify({ type: "success" });
+        setUserCredentials({ ...e });
       }}
-      // onSubmit={(e) => {
-      //   handleClose();
-      //   console.log(e);
-      // }}
     >
       {(formik) => (
         <form
           onSubmit={formik.handleSubmit}
           className="relative flex flex-col text-gray-700 p-4 bg-transparent rounded-xl bg-clip-border w-fit mx-auto shadow-2xl  "
         >
+          {/* {!isLoading && !isPending && error && <ToastContainer />} */}
           <ToastContainer />
           <h4 className="block font-sans text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
             Sign Up
