@@ -3,6 +3,7 @@ import { userSchema } from "../../schema/user/user.schema";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useUser from "../../hooks/user.hook";
+import { useNavigate } from "react-router-dom";
 
 export default function SignupForm({
   open,
@@ -11,16 +12,21 @@ export default function SignupForm({
   handleClose,
 }) {
   const { data, isLoading, isPending, error, setUserCredentials } = useUser();
-
+  const navigate = useNavigate();
   const notify = ({ label, ...props }) => toast(label, { ...props });
   if (!isLoading && !isPending && !error && data) {
-    notify({ label: `Successfully created new account!!`, type: "success" });
+    notify({
+      label: `Successfully created new account!!`,
+      type: "success",
+      autoClose: 1800,
+    });
+    setTimeout(() => {
+      navigate("/blogs");
+      handleClose();
+    }, 1800);
   }
-  console.log("Checking ERror:\t", Boolean(error));
 
   if (!isLoading && !isPending && Boolean(error)) {
-    console.log("Error On Signup Form");
-
     notify({ label: `${error.message}`, type: "error" });
   }
   return (

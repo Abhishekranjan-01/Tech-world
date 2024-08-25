@@ -1,10 +1,11 @@
 import { endpoint } from "../config/endpoint";
+import { constants } from "../constants/constants";
 
 export async function signupUser({ queryKey }) {
   console.log("Where fetch exists", queryKey[1]);
 
   const res = await fetch(
-    `${import.meta.env.VITE_TECH_WORLD_URL}${endpoint.USER.signupUser}`,
+    `${constants.url.projectUrl}${endpoint.USER.signupUser}`,
     {
       headers: {
         Accept: "application/json",

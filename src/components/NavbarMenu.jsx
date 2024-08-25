@@ -1,8 +1,10 @@
 import { Navbar, Button } from "flowbite-react";
 import { NavLink } from "react-router-dom";
 import SignupFormDialog from "../components/modal/signup.modal";
+import useUserData from "../store/userStore";
 
 export function NavbarMenu() {
+  const user = useUserData((state) => state.user);
   return (
     <Navbar fluid rounded className="fixed top-0 w-full z-50 border  shadow-lg">
       <Navbar.Brand href="https://flowbite-react.com">
@@ -19,7 +21,7 @@ export function NavbarMenu() {
         {/* <Button className=" max-sm:p-0 max-sm:mx-4 text-sm sm:text-base sm:w-fit">
           Add Blog
         </Button> */}
-        <SignupFormDialog />
+        {!user ? <SignupFormDialog /> : <h2>{user?.firstName}</h2>}
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
