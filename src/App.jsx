@@ -6,7 +6,7 @@ const queryClient = new QueryClient();
 function App() {
   const nullifyUser = useUserData((state) => state.nullifyUser);
   useEffect(() => {
-    return () => nullifyUser();
+    nullifyUser();
   }, []);
   return (
     <QueryClientProvider client={queryClient}>

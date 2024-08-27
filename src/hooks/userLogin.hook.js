@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { signupUser } from "../api/userSignup.api";
 import { useState } from "react";
+import userLogin from "../api/userLogin.api";
 import useUserData from "../store/userStore";
 
-export default function useUser() {
+export default function useUserLogin() {
   const setUser = useUserData((state) => state.setUser);
   const [userData, setUserData] = useState(false);
   const setUserCredentials = async function (userCredentials) {
@@ -11,7 +11,7 @@ export default function useUser() {
   };
   const { isPending, error, isLoading, isSuccess, data } = useQuery({
     queryKey: ["userData", userData],
-    queryFn: signupUser,
+    queryFn: userLogin,
     enabled: Boolean(userData),
     refetchOnWindowFocus: false,
     retry: false,

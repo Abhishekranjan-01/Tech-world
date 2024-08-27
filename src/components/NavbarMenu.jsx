@@ -2,6 +2,7 @@ import { Navbar, Button } from "flowbite-react";
 import { NavLink } from "react-router-dom";
 import SignupFormDialog from "../components/modal/signup.modal";
 import useUserData from "../store/userStore";
+import LoginFormDialog from "./modal/Login.modal";
 
 export function NavbarMenu() {
   const user = useUserData((state) => state.user);
@@ -21,7 +22,15 @@ export function NavbarMenu() {
         {/* <Button className=" max-sm:p-0 max-sm:mx-4 text-sm sm:text-base sm:w-fit">
           Add Blog
         </Button> */}
-        {!user ? <SignupFormDialog /> : <h2>{user?.firstName}</h2>}
+        {!user ? (
+          <div className="flex flex-row gap-4">
+            {" "}
+            <LoginFormDialog />
+            <SignupFormDialog />{" "}
+          </div>
+        ) : (
+          <h2>{user?.firstName}</h2>
+        )}
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
