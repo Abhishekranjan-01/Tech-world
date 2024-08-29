@@ -1,11 +1,24 @@
-import { Navbar, Button } from "flowbite-react";
-import { NavLink } from "react-router-dom";
+import { Navbar } from "flowbite-react";
+import { NavLink, useNavigate } from "react-router-dom";
 import SignupFormDialog from "../components/modal/signup.modal";
 import useUserData from "../store/userStore";
 import LoginFormDialog from "./modal/Login.modal";
+import useUserLogout from "../hooks/userLogout.hook";
 
 export function NavbarMenu() {
-  const user = useUserData((state) => state.user);
+  const { user, nullifyUser } = useUserData((state) => state);
+  const {
+    setUserCredentials: setUserDataForLogout,
+    data: logoutData,
+    error: logoutError,
+  } = useUserLogout();
+  const navigate = useNavigate();
+  if (logoutData) {
+    nullifyUser();
+  }
+  if (logoutError) {
+    console.log(logoutError);
+  }
   return (
     <Navbar fluid rounded className="fixed top-0 w-full z-50 border  shadow-lg">
       <Navbar.Brand href="https://flowbite-react.com">
@@ -29,7 +42,15 @@ export function NavbarMenu() {
             <SignupFormDialog />{" "}
           </div>
         ) : (
-          <h2>{user?.firstName}</h2>
+          // <h2>{user?.firstName}</h2>
+          <button
+            onClick={() => {
+              setUserDataForLogout(user);
+            }}
+            className="hidden sm:block border text-sm sm:text-base border-blue-500 rounded-lg p-2"
+          >
+            Logout
+          </button>
         )}
         <Navbar.Toggle />
       </div>
@@ -59,6 +80,20 @@ export function NavbarMenu() {
         >
           Blogs
         </NavLink>
+        {user && (
+          <NavLink
+            to="/blogs"
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending"
+                : isActive
+                ? "text-[#00838F]"
+                : "text-gray-600"
+            }
+          >
+            Logout
+          </NavLink>
+        )}
       </Navbar.Collapse>
     </Navbar>
   );
