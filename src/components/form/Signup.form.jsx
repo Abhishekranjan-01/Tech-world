@@ -10,11 +10,12 @@ export default function SignupForm({
   setOpen,
   handleClickOpen,
   handleClose,
+  notify,
 }) {
-  const { data, isLoading, isPending, error, setUserCredentials } = useUser();
+  const { data, error, setUserCredentials } = useUser();
   const navigate = useNavigate();
-  const notify = ({ label, ...props }) => toast(label, { ...props });
-  if (!isLoading && !isPending && !error && data) {
+
+  if (data) {
     notify({
       label: `Successfully created new account!!`,
       type: "success",
@@ -26,7 +27,7 @@ export default function SignupForm({
     }, 1800);
   }
 
-  if (!isLoading && !isPending && Boolean(error)) {
+  if (error) {
     notify({ label: `${error.message}`, type: "error" });
   }
   return (

@@ -1,7 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import useUserLogin from "../../hooks/userLogin.hook";
 
 export default function LoginForm({
@@ -9,9 +7,9 @@ export default function LoginForm({
   setOpen,
   handleClickOpen,
   handleClose,
+  notify,
 }) {
-  const { data, isLoading, isPending, error, setUserCredentials } =
-    useUserLogin();
+  const { data, error, setUserCredentials } = useUserLogin();
   const navigate = useNavigate();
   const emailRef = useRef("");
   const passwordRef = useRef("");
@@ -24,20 +22,19 @@ export default function LoginForm({
       password: passwordRef.current.value,
     });
   };
-  const notify = ({ label, ...props }) => toast(label, { ...props });
-  if (!isLoading && !isPending && !error && data) {
+  if (data) {
     notify({
       label: `Successfully Loggedin!!`,
       type: "success",
       autoClose: 1800,
     });
-    setTimeout(() => {
-      navigate("/blogs");
-      handleClose();
-    }, 1800);
+    // setTimeout(() => {
+    //   navigate("/blogs");
+    //   handleClose();
+    // }, 1800);
   }
 
-  if (!isLoading && !isPending && Boolean(error)) {
+  if (error) {
     notify({ label: `${error.message}`, type: "error" });
   }
   return (
@@ -46,7 +43,7 @@ export default function LoginForm({
       className="relative flex flex-col text-gray-700 p-4 bg-transparent rounded-xl bg-clip-border w-fit mx-auto shadow-2xl  "
     >
       {/* {!isLoading && !isPending && error && <ToastContainer />} */}
-      <ToastContainer />
+
       <h4 className="block font-sans text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
         Sign in
       </h4>

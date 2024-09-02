@@ -5,17 +5,11 @@ import DialogContent from "@mui/material/DialogContent";
 import SignupForm from "../form/Signup.form";
 import LoginForm from "../form/Login.form";
 
-export default function LoginFormDialog() {
+export default function LoginFormDialog({ notify }) {
   const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+  const handleClickOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <React.Fragment>
       <Button variant="outlined" onClick={handleClickOpen}>
@@ -34,6 +28,7 @@ export default function LoginFormDialog() {
             setOpen={setOpen}
             handleClickOpen={handleClickOpen}
             handleClose={handleClose}
+            notify={notify}
           />
         </DialogContent>
         {/* <DialogActions>

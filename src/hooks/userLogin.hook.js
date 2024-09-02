@@ -9,7 +9,7 @@ export default function useUserLogin() {
   const setUserCredentials = async function (userCredentials) {
     setUserData(userCredentials);
   };
-  const { isPending, error, isLoading, isSuccess, data } = useQuery({
+  const { isPending, error, isLoading, data } = useQuery({
     queryKey: ["userData", userData],
     queryFn: userLogin,
     enabled: Boolean(userData),
@@ -22,10 +22,10 @@ export default function useUserLogin() {
   if (!isLoading && !isPending) {
     setUserData(false);
   }
-  if (!isLoading && !isPending && data) {
+  if (data) {
     console.log("Data received from api", data);
 
     setUser(data);
   }
-  return { setUserCredentials, data, isPending, isLoading, isSuccess, error };
+  return { setUserCredentials, data, error };
 }
