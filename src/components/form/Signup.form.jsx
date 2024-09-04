@@ -1,9 +1,8 @@
 import { Formik, ErrorMessage } from "formik";
 import { userSchema } from "../../schema/user/user.schema";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import useUser from "../../hooks/user.hook";
 import { useNavigate } from "react-router-dom";
+import { signupUser } from "../../api/userSignup.api";
 
 export default function SignupForm({
   open,
@@ -12,7 +11,10 @@ export default function SignupForm({
   handleClose,
   notify,
 }) {
-  const { data, error, setUserCredentials } = useUser();
+  const { data, error, setUserCredentials } = useUser({
+    queryKey: "signupUser",
+    apiFunction: signupUser,
+  });
   const navigate = useNavigate();
 
   if (data) {
@@ -29,6 +31,7 @@ export default function SignupForm({
 
   if (error) {
     notify({ label: `${error.message}`, type: "error" });
+    handleClose();
   }
   return (
     <Formik
@@ -45,7 +48,7 @@ export default function SignupForm({
           className="relative flex flex-col text-gray-700 p-4 bg-transparent rounded-xl bg-clip-border w-fit mx-auto shadow-2xl  "
         >
           {/* {!isLoading && !isPending && error && <ToastContainer />} */}
-          <ToastContainer />
+
           <h4 className="block font-sans text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
             Sign Up
           </h4>
