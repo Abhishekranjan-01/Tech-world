@@ -2,6 +2,7 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
+import { DialogActions } from "@mui/material";
 import SignupForm from "../form/Signup.form";
 
 export default function SignupFormDialog({ notify }) {
@@ -21,7 +22,7 @@ export default function SignupFormDialog({ notify }) {
           component: "div",
         }}
       >
-        <DialogContent>
+        <DialogContent className="sm:w-full"> 
           <SignupForm
             open={open}
             setOpen={setOpen}
@@ -30,10 +31,10 @@ export default function SignupFormDialog({ notify }) {
             notify={notify}
           />
         </DialogContent>
-        {/* <DialogActions>
+        <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit">Subscribe</Button>
-        </DialogActions> */}
+          {/* <Button type="submit">Subscribe</Button> */}
+        </DialogActions>
       </Dialog>
     </React.Fragment>
   );

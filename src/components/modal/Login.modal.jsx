@@ -2,7 +2,7 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
-import SignupForm from "../form/Signup.form";
+import { DialogActions } from "@mui/material";
 import LoginForm from "../form/Login.form";
 
 export default function LoginFormDialog({ notify }) {
@@ -31,10 +31,10 @@ export default function LoginFormDialog({ notify }) {
             notify={notify}
           />
         </DialogContent>
-        {/* <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit">Subscribe</Button>
-        </DialogActions> */}
+        <DialogActions>
+          <Button onClick={handleClose}>Close</Button>
+          {/* <Button type="submit">Subscribe</Button> */}
+        </DialogActions>
       </Dialog>
     </React.Fragment>
   );

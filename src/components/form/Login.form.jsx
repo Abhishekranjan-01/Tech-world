@@ -44,7 +44,7 @@ export default function LoginForm({
   return (
     <form
       onSubmit={onSubmit}
-      className="relative flex flex-col text-gray-700 p-4 bg-transparent rounded-xl bg-clip-border w-fit mx-auto shadow-2xl  "
+      className="flex flex-col w-[280px] sm:w-full text-gray-700 p-1 sm:p-4 bg-transparent rounded-xl bg-clip-border  mx-auto shadow-2xl  "
     >
       {/* {!isLoading && !isPending && error && <ToastContainer />} */}
 
@@ -60,7 +60,7 @@ export default function LoginForm({
           <label className="block -mb-3 font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">
             Email
           </label>
-          <div className="relative h-11 w-full min-w-[200px]">
+          <div className="relative h-11 w-[250px] sm:w-full">
             <input
               ref={emailRef}
               placeholder="name@mail.com"
@@ -72,7 +72,7 @@ export default function LoginForm({
           <label className="block -mb-3 font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">
             Password
           </label>
-          <div className="relative h-11 w-full min-w-[200px]">
+          <div className="relative h-11 w-[250px] sm:w-full">
             <input
               ref={passwordRef}
               type="password"
@@ -86,16 +86,16 @@ export default function LoginForm({
 
         <button
           type="submit"
-          className="mt-6 block w-full select-none rounded-lg bg-gray-900 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          className="mt-6 block w-[250px] sm:w-full select-none rounded-lg bg-gray-900 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
         >
           Sign in
         </button>
-        <p className="block mt-4 font-sans text-base antialiased font-normal leading-relaxed text-center text-gray-700">
+        {/* <p className="block mt-4 font-sans text-base antialiased font-normal leading-relaxed text-center text-gray-700">
           Didn't have an account?
           <a href="#" className="font-medium text-gray-900">
             Sign up
           </a>
-        </p>
+        </p> */}
       </div>
     </form>
   );
