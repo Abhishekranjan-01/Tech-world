@@ -6,6 +6,8 @@ import LoginFormDialog from "./modal/Login.modal";
 import useUserLogout from "../hooks/userLogout.hook";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useUser from "../hooks/user.hook";
+import userLogout from "../api/userLogout.api";
 
 export function NavbarMenu() {
   const { user, nullifyUser } = useUserData((state) => state);
@@ -13,14 +15,17 @@ export function NavbarMenu() {
     setUserCredentials: setUserDataForLogout,
     data: logoutData,
     error: logoutError,
-  } = useUserLogout();
+  } = useUser({ queryKey: "userLogout", apiFunction: userLogout });
   const navigate = useNavigate();
   const notify = ({ label, ...props }) =>
     toast(label, { containerId: "userLoginAndSignupAlert", ...props });
   if (logoutData) {
+    notify({ label: "User logout successfully", type: "success" });
     nullifyUser();
   }
   if (logoutError) {
+    console.log();
+    notify({ label: "User Couldn't logout", type: "error" });
     console.log(logoutError);
   }
   return (
@@ -50,7 +55,8 @@ export function NavbarMenu() {
           // <h2>{user?.firstName}</h2>
           <button
             onClick={() => {
-              nullifyUser();
+              // nullifyUser();
+              setUserDataForLogout("logout");
             }}
             className="hidden sm:block border text-sm sm:text-base border-blue-500 rounded-lg p-2"
           >

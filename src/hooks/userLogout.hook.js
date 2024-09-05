@@ -25,7 +25,6 @@ export default function useUserLogout() {
   }
   if (!isLoading && !isPending) {
     console.log("Data received from api", data);
-    setUser(null);
   }
   return { setUserCredentials, data, isPending, isLoading, isSuccess, error };
 }
