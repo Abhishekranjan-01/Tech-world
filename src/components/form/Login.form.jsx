@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 // import useUserLogin from "../../hooks/userLogin.hook";
-import useUser from "../../hooks/user.hook";
-import userLogin from "../../api/userLogin.api";
 
 export default function LoginForm({
   open,
@@ -10,11 +8,8 @@ export default function LoginForm({
   handleClickOpen,
   handleClose,
   notify,
+  setUserCredentials,
 }) {
-  const { data, error, setUserCredentials } = useUser({
-    queryKey: "loginUser",
-    apiFunction: userLogin,
-  });
   const navigate = useNavigate();
   const emailRef = useRef("");
   const passwordRef = useRef("");
@@ -25,22 +20,7 @@ export default function LoginForm({
       password: passwordRef.current.value,
     });
   };
-  if (data) {
-    notify({
-      label: `Successfully Loggedin!!`,
-      type: "success",
-      autoClose: 1800,
-    });
-    // setTimeout(() => {
-    //   navigate("/blogs");
-    //   handleClose();
-    // }, 1800);
-  }
 
-  if (error) {
-    notify({ label: `${error.message}`, type: "error" });
-    handleClose();
-  }
   return (
     <form
       onSubmit={onSubmit}
