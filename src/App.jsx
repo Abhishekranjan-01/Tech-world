@@ -1,20 +1,23 @@
 import { useEffect } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AppRoutes from "./routes/AppRoutes";
 import useUserData from "./store/userStore";
-const queryClient = new QueryClient();
+import useUser from "./hooks/user.hook";
+import userAuth from "./api/userAuth.api";
+
 function App() {
   const nullifyUser = useUserData((state) => state.nullifyUser);
+  const {
+    setUserCredentials,
+    data: userData,
+    isLoading: userDataIsLoading,
+    error: userDataError,
+  } = useUser({ queryKey: "auth", apiFunction: userAuth });
+
   useEffect(() => {
-    nullifyUser();
+    // nullifyUser();
+    setUserCredentials(true);
   }, []);
-  return (
-    <QueryClientProvider client={queryClient}>
-      <>
-        <AppRoutes />
-      </>
-    </QueryClientProvider>
-  );
+  return <AppRoutes />;
 }
 
 export default App;
