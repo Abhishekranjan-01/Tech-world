@@ -27,6 +27,8 @@ export function Main() {
       </button>
       <button onClick={() => {}}>Write blogs</button>
       <Editor
+        apiKey={constants.EDITOR_API}
+        tinymceScriptSrc="/tinymce/tinymce.min.js"
         onInit={(_evt, editor) => (editorRef.current = editor)}
         initialValue="<p>This is the initial content of the editor.</p>"
         init={{

@@ -15,7 +15,6 @@ export default function Home() {
   }, []);
   return (
     <div className="w-screen h-screen bg-gray-900">
-      <div></div>
       <Main />
     </div>
   );
