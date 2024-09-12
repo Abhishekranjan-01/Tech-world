@@ -10,14 +10,14 @@ export default function PublishBlog() {
   };
   return (
     <main className="flex flex-col items-center gap-6 w-full">
-      <div className="mt-20 sm:w-3/4 mx-auto border-2 border-gray-500 rounded-lg">
+      <div className="mt-20 mx-4 sm:mx-0  sm:w-3/4 border-2 border-gray-500 rounded-lg">
         <Editor
           apiKey={constants.EDITOR_API}
           onInit={(_evt, editor) => (editorRef.current = editor)}
           initialValue="<p>This is the initial content of the editor.</p>"
           init={{
             height: 500,
-            menubar: false,
+            menubar: true,
             plugins: [
               "advlist",
               "autolink",
