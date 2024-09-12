@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { constants } from "../constants/constants";
+import { SubmitButton } from "../components/common/Button/Button";
 export default function PublishBlog() {
   const editorRef = useRef(null);
   const log = () => {
@@ -49,9 +50,7 @@ export default function PublishBlog() {
         />
       </div>
 
-      <button className="w-fit mx-auto" onClick={log}>
-        Publish
-      </button>
+      <SubmitButton label={"Next"} onClick={log} className="w-fit mx-auto" />
     </main>
   );
 }
