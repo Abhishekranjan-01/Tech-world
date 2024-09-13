@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import SignupFormDialog from "../components/modal/signup.modal";
 import useUserData from "../store/userStore";
 import LoginFormDialog from "./modal/Login.modal";
+import AddTitleAndFeatureImage from "./modal/AddTitleAndFeatureImage.modal"
 import useUserLogout from "../hooks/userLogout.hook";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -50,6 +51,7 @@ export function NavbarMenu() {
             {" "}
             <LoginFormDialog notify={notify} />
             <SignupFormDialog notify={notify} />
+            <AddTitleAndFeatureImage/>
           </div>
         ) : (
           // <h2>{user?.firstName}</h2>
